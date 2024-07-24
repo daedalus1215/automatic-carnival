@@ -6,7 +6,7 @@ import { TimeVO } from "src/tasks/infrastructure/schema/task/time.vo";
 import { DateUtil } from "src/utils/date-util";
 
 @Injectable()
-export class CreateDateTimeOfTask {
+export class CreateDateTimeOfTaskTS {
     constructor(@InjectModel(Task.name) private model: Model<TaskDocument>, private readonly dateUtil: DateUtil) { }
 
     async apply(taskId: string) {

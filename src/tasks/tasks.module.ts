@@ -4,8 +4,8 @@ import { TasksService } from './domain/services/tasks.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Task, TaskSchema } from './infrastructure/schema/task/task.schema';
 import { UtilModule } from 'src/utils/utils.module';
-import { FetchAllTaskTitles } from './domain/transacription-scripts/tasks/fetch-all-task-titles/fetch-all-task-titles.transcription-script';
-import { CreateDateTimeOfTask } from './domain/transacription-scripts/tasks/create-date-time.transcription-script/create-date-time.transcription-script';
+import { FetchAllTaskTitlesTS } from './domain/transacription-scripts/tasks/fetch-all-task-titles/fetch-all-task-titles.transcription-script';
+import { CreateDateTimeOfTaskTS } from './domain/transacription-scripts/tasks/create-date-time.transcription-script/create-date-time.transcription-script';
 import { FetchStatsForStackForRangeOfDates } from './domain/transacription-scripts/activities/fetch-stats-for-stack-for-range/fetch-stats-for-stack-for-range-dates.transcription-scripts';
 import { UpdateDateTime } from './domain/transacription-scripts/tasks/update-date-time/update-date-time.transcription-script';
 import { ActivityService } from './domain/services/activity.service';
@@ -28,8 +28,8 @@ import { FetchTodaysActivities } from './domain/transacription-scripts/activitie
     GroupTitlesFormatConverter,
 
     // Transcription Scripts
-    FetchAllTaskTitles,
-    CreateDateTimeOfTask,
+    FetchAllTaskTitlesTS,
+    CreateDateTimeOfTaskTS,
     UpdateDateTime,
     
     // Activities TS
