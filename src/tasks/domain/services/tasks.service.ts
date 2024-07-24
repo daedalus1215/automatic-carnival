@@ -5,17 +5,19 @@ import { InjectModel } from '@nestjs/mongoose';
 import { UpdateTaskDto } from '../../application/dtos/update-task/update-task.dto';
 import { DateTimeDto } from '../../application/dtos/update-task/date-time.dto';
 import { DateUtil } from '../../../utils/date-util';
-import { FetchAllTaskTitles } from '../transacription-scripts/tasks/fetch-all-task-titles/fetch-all-task-titles.transcription-script';
-import { CreateDateTimeOfTask } from '../transacription-scripts/tasks/create-date-time.transcription-script/create-date-time.transcription-script';
+import { FetchAllTaskTitlesTS } from '../transacription-scripts/tasks/fetch-all-task-titles/fetch-all-task-titles.transcription-script';
+import { CreateDateTimeOfTaskTS } from '../transacription-scripts/tasks/create-date-time.transcription-script/create-date-time.transcription-script';
 import { UpdateDateTime } from '../transacription-scripts/tasks/update-date-time/update-date-time.transcription-script';
 import { StringUtil } from 'src/utils/string-util';
+import { ImportTasksTS } from '../transacription-scripts/tasks/import-tasks/transaction-script/import-tasks.transaction-script';
 
 @Injectable()
 export class TasksService {
     constructor(
         @InjectModel(Task.name) private model: Model<TaskDocument>,
-        private readonly fetchAllTaskTitles: FetchAllTaskTitles,
-        private readonly createDateTimeOfTask: CreateDateTimeOfTask,
+        private readonly fetchAllTaskTitlesTS: FetchAllTaskTitlesTS,
+        private readonly createDateTimeOfTaskTS: CreateDateTimeOfTaskTS,
+        private readonly importTasksTS: ImportTasksTS,
         private readonly updateDateTime: UpdateDateTime,
         private readonly stringUtil: StringUtil,
         private readonly dateUtil: DateUtil) { }
@@ -40,7 +42,7 @@ export class TasksService {
 
     //@TODO: Unit test this
     async fetchAllTitles(title: string) {
-        return await this.fetchAllTaskTitles.apply(title);
+        return await this.fetchAllTaskTitlesTS.apply(title);
     }
 
     //@TODO: Unit Test this
@@ -102,6 +104,11 @@ export class TasksService {
 
     //@TODO: Unit test this
     async createDateTime(taskId: string) {
-        return this.createDateTimeOfTask.apply(taskId);
+        return this.createDateTimeOfTaskTS.apply(taskId);
+    }
+
+    //@TODO: Unit test this
+    async importTasks(tasks: Task[]) {
+        return this.importTasksTS.apply(tasks)
     }
 }
