@@ -11,14 +11,14 @@ import {
 import { TasksService } from '../../../domain/services/tasks.service'
 import { UpdateTaskDto } from '../../dtos/update-task/update-task.dto'
 import { DateTimeDto } from '../../dtos/update-task/date-time.dto'
+import { Task } from 'src/types'
 
 @Controller('tasks')
 export class TasksController {
-  constructor(private taskService: TasksService) {}
+  constructor(private taskService: TasksService) { }
 
   @Get()
   async findAll() {
-    console.log('findAll')
     return await this.taskService.findAll()
   }
 
@@ -34,13 +34,11 @@ export class TasksController {
 
   @Get('/tasks-titles')
   async fetchAllTaskTitles(@Query('title') title: string) {
-    console.log('title', title)
     return await this.taskService.fetchAllTitles(title)
   }
 
   @Get('/:id')
   async findOne(@Param('id') id: string) {
-    console.log('findOne')
     return await this.taskService.findOne(id)
   }
 
@@ -61,11 +59,14 @@ export class TasksController {
   }
 
   @Put('/:taskId/dateTime')
-  async updateDateTimeOfTask(
-    @Param('taskId') taskId,
-    @Body() body: DateTimeDto
-  ) {
+  async updateDateTimeOfTask(@Param('taskId') taskId, @Body() body: DateTimeDto) {
     console.log('updateTask', body)
     return await this.taskService.updateDateTimeOfTask(taskId, body)
+  }
+
+  //@TODO: Add test for me
+  @Post('/import')
+  async importTasks(@Body() body: Task[]) {
+    return await this.taskService.importTasks(body)
   }
 }
