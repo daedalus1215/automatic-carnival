@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import { FetchStatsForStackForRangeOfDates } from "../transacription-scripts/activities/fetch-stats-for-stack-for-range/fetch-stats-for-stack-for-range-dates.transcription-scripts";
-import { FetchAllMonthTasks } from "../transacription-scripts/activities/fetch-all-month-tasks/fetch-all-month-tasks.transcription-script";
-import { FetchTodaysTasks } from "../transacription-scripts/activities/fetch-todays-tasks/fetch-todays-tasks.transcription-script";
-import { FetchTodaysActivities } from "../transacription-scripts/activities/fetch-todays-activities/fetch-todays-activities.transcription-script";
+import { FetchStatsForStackForRangeOfDates } from "../transaction-scripts/fetch-stats-for-stack-for-range/fetch-stats-for-stack-for-range-dates.transcription-scripts";
+import { FetchAllMonthTasks } from "../transaction-scripts/fetch-all-month-tasks/fetch-all-month-tasks.transcription-script";
+import { FetchTodaysTasks } from "../transaction-scripts/fetch-todays-tasks/fetch-todays-tasks.transcription-script";
+import { FetchTodaysActivities } from "../transaction-scripts/fetch-todays-activities/fetch-todays-activities.transcription-script";
+
 
 @Injectable()
 export class ActivityService {

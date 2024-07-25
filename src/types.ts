@@ -1,9 +1,9 @@
 export type Task = {
     id: string;
     tags: string[];
-    description?: string;
+    description: string;
     date: string;
-    title?: string;
+    title: string;
     time: Time[];
 }
 
