@@ -2,9 +2,9 @@ import { Injectable } from "@nestjs/common";
 import { FilterUtil } from "src/utils/filter-util";
 import { GroupTitlesBasedOnDateConverter } from "./converters/group-titles-based-on-date.converter";
 import { InjectModel } from "@nestjs/mongoose";
-import { Task, TaskDocument } from "../../../../infrastructure/schema/task/task.schema";
 import { Model } from "mongoose";
 import { GroupTitlesFormatConverter } from "./converters/group-titles-format.converter";
+import { Task, TaskDocument } from "src/tasks/infrastructure/schema/task/task.schema";
 
 //@TODO: Unit test this
 @Injectable()

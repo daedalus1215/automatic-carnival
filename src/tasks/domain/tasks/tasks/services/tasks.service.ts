@@ -1,15 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Task, TaskDocument } from '../../infrastructure/schema/task/task.schema';
+import { Task, TaskDocument } from '../../../../infrastructure/schema/task/task.schema';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { UpdateTaskDto } from '../../application/dtos/update-task/update-task.dto';
-import { DateTimeDto } from '../../application/dtos/update-task/date-time.dto';
-import { DateUtil } from '../../../utils/date-util';
-import { FetchAllTaskTitlesTS } from '../transacription-scripts/tasks/fetch-all-task-titles/fetch-all-task-titles.transcription-script';
-import { CreateDateTimeOfTaskTS } from '../transacription-scripts/tasks/create-date-time.transcription-script/create-date-time.transcription-script';
-import { UpdateDateTime } from '../transacription-scripts/tasks/update-date-time/update-date-time.transcription-script';
+import { UpdateTaskDto } from '../../../../application/dtos/update-task/update-task.dto';
+import { DateTimeDto } from '../../../../application/dtos/update-task/date-time.dto';
+import { DateUtil } from '../../../../../utils/date-util';
 import { StringUtil } from 'src/utils/string-util';
-import { ImportTasksTS } from '../transacription-scripts/tasks/import-tasks/transaction-script/import-tasks.transaction-script';
+import { FetchAllTaskTitlesTS } from '../transaction-scripts/fetch-all-task-titles/fetch-all-task-titles.transcription-script';
+import { CreateDateTimeOfTaskTS } from '../transaction-scripts/create-date-time/create-date-time.transcription-script';
+import { ImportTasksTS } from '../transaction-scripts/import-tasks/import-tasks.transaction-script';
+import { UpdateDateTime } from '../transaction-scripts/update-date-time/update-date-time.transcription-script';
 
 @Injectable()
 export class TasksService {
@@ -108,7 +108,9 @@ export class TasksService {
     }
 
     //@TODO: Unit test this
-    async importTasks(tasks: Task[]) {
-        return this.importTasksTS.apply(tasks)
+    async importTasks(tasks: Task[]): Promise<Set<string>> {
+        //@TODO: Return the tags up to aggregator, aggregator will pass to TagAggregator.
+        const tags = await this.importTasksTS.apply(tasks)
+        return tags; 
     }
 }
