@@ -7,17 +7,11 @@ import { StringUtil } from "src/utils/string-util";
 
 @Injectable()
 export class FetchAllTaskTitlesTS {
-    constructor(
-        @InjectModel(Task.name) private model: Model<TaskDocument>,
-        private readonly dateUtil: DateUtil,
-        private readonly stringUtil: StringUtil) { }
-
+    constructor(@InjectModel(Task.name) private model: Model<TaskDocument>, private readonly dateUtil: DateUtil, private readonly stringUtil: StringUtil) { }
 
     async apply(title?: string) {
-        console.log('hi');
         try {
             const tasks = await this.model.find();
-            console.log('ho');
 
             tasks.sort(this.dateUtil.sort); // Sort tasks by date in descending order
             const formattedName = title?.toLowerCase();

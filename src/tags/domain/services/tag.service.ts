@@ -7,9 +7,7 @@ import { TagEntity } from "../entities/tag.entity";
 @Injectable()
 export class TagService {
 
-    constructor(
-        @Inject('TagRepository') private repository: TagRepository) {
-    }
+    constructor(@Inject('TagRepository') private repository: TagRepository) { }
 
     async findAll() {
         return await this.repository.findAll();
