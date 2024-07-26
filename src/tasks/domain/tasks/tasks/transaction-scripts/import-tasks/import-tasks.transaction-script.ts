@@ -8,12 +8,10 @@ export class ImportTasksTS {
 
     constructor(@InjectModel(Task.name) private model: Model<TaskDocument>) { }
 
-    async apply(tasks: Task[]): Promise<Set<string>> {
+    async apply(tasks: Task[]) {
         tasks.forEach(async task => {
             const tempTask = await this.model.create(task);
             tempTask.save();
         })
-
-        return new Set(tasks.flatMap(task => task.tags));
     }
 }

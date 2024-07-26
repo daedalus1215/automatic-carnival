@@ -17,15 +17,13 @@ export class UpdateDateTime {
             throw new NotFoundException("task not found");
         }
 
-        const dateTimes = task.time.map((dateTimeFromDb) => {
+        task.time = task.time.map((dateTimeFromDb) => {
             if (dateTimeFromDb._id == dto._id) {
                 return Object.assign(dateTimeFromDb, { ...dto, time: this.dateUtil.minutesToMilliseconds(dto.time) });
             }
 
             return dateTimeFromDb;
         });
-
-        task.time = dateTimes;
         task.date = dto.date;
         return await task.save();
     }

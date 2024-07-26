@@ -67,7 +67,6 @@ export class TasksController {
   //@TODO: Add test for me
   @Post('/import')
   async importTasks(@Body() body: Task[]) {
-    //@TODO: Use aggregator here, not the service, since we must integrate with Tag domain.
     return await this.taskService.importTasks(body)
   }
 }

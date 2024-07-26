@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { UpdateTaskDto } from '../../../../application/dtos/update-task/update-task.dto';
 import { DateTimeDto } from '../../../../application/dtos/update-task/date-time.dto';
 import { DateUtil } from '../../../../../utils/date-util';
-import { StringUtil } from 'src/utils/string-util';
+import { StringUtil } from '../../../../../utils/string-util';
 import { FetchAllTaskTitlesTS } from '../transaction-scripts/fetch-all-task-titles/fetch-all-task-titles.transcription-script';
 import { CreateDateTimeOfTaskTS } from '../transaction-scripts/create-date-time/create-date-time.transcription-script';
 import { ImportTasksTS } from '../transaction-scripts/import-tasks/import-tasks.transaction-script';
@@ -108,9 +108,7 @@ export class TasksService {
     }
 
     //@TODO: Unit test this
-    async importTasks(tasks: Task[]): Promise<Set<string>> {
-        //@TODO: Return the tags up to aggregator, aggregator will pass to TagAggregator.
-        const tags = await this.importTasksTS.apply(tasks)
-        return tags; 
+    async importTasks(tasks: Task[]) {
+        await this.importTasksTS.apply(tasks)
     }
 }
