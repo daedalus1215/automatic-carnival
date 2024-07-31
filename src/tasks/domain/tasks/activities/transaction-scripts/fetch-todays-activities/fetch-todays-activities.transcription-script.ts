@@ -15,9 +15,10 @@ export class FetchTodaysActivities {
         const tasks = await this.model.find();
         const filtered = tasks.filter(task => task?.date);
         const results = {};
-        const f = this.filterUtil.exclusiveFilter(filtered, excludeTags)
-        const d = this.filterUtil.inclusiveFilter(f, includeTags)
-        d.forEach(task => {
+        const excludedFilters = this.filterUtil.exclusiveFilter(filtered, excludeTags)
+        const includedFilters = this.filterUtil.inclusiveFilter(excludedFilters, includeTags)
+
+        includedFilters.forEach(task => {
             task.time
                 .filter(time => time?.date)
                 .map(time => {
@@ -45,8 +46,9 @@ export class FetchTodaysActivities {
             })
         }
 
+        // @TODO: This will probably break if the record count is less than 365. 
         return newResults
             .sort(this.dateUtil.sort)
-            .slice(0, 365);
+            .slice(newResults.length - 365, newResults.length -1);
     }
 }
