@@ -10,6 +10,7 @@ import { FetchAllTaskTitlesTS } from "../../transaction-scripts/fetch-all-task-t
 import { CreateDateTimeOfTaskTS } from "../../transaction-scripts/create-date-time/create-date-time.transcription-script";
 import { ImportTasksTS } from "../../transaction-scripts/import-tasks/import-tasks.transaction-script";
 import { UpdateDateTime } from "../../transaction-scripts/update-date-time/update-date-time.transcription-script";
+import { RemoveZeroTags } from "../../transaction-scripts/fix-tasks/remove-zero-tags.transaction-script";
 
 describe('server/src/tasks/services/__tests__/tasks.service.spec.ts', () => {
     describe('taskService', () => {
@@ -20,6 +21,7 @@ describe('server/src/tasks/services/__tests__/tasks.service.spec.ts', () => {
         let createDateTimeOfTaskTSMock: CreateDateTimeOfTaskTS;
         let importTasksTSMock: ImportTasksTS;
         let updateDateTimeMock: UpdateDateTime;
+        let removeZeroTagsMock: RemoveZeroTags;
 
         beforeEach(async () => {
             modelMock = jest.fn() as unknown as Model<TaskDocument>;
@@ -27,6 +29,7 @@ describe('server/src/tasks/services/__tests__/tasks.service.spec.ts', () => {
             createDateTimeOfTaskTSMock = { apply: jest.fn() } as unknown as CreateDateTimeOfTaskTS;
             importTasksTSMock = { apply: jest.fn() } as unknown as ImportTasksTS;
             updateDateTimeMock = { apply: jest.fn() } as unknown as UpdateDateTime;
+            removeZeroTagsMock = { apply: jest.fn() } as unknown as RemoveZeroTags;
             randomUtils = new RandomUtils();
 
             target = new TasksService(
@@ -35,6 +38,7 @@ describe('server/src/tasks/services/__tests__/tasks.service.spec.ts', () => {
                 createDateTimeOfTaskTSMock,
                 importTasksTSMock,
                 updateDateTimeMock,
+                removeZeroTagsMock,
                 new StringUtil(),
                 new DateUtil()
             );
@@ -116,7 +120,5 @@ describe('server/src/tasks/services/__tests__/tasks.service.spec.ts', () => {
                 await expect(target.update()).rejects.toThrow('dto');
             });
         });
-
-       
     });
 });
