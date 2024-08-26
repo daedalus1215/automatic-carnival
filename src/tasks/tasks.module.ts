@@ -16,10 +16,14 @@ import { FetchAllMonthTasks } from './domain/tasks/activities/transaction-script
 import { FetchTodaysTasks } from './domain/tasks/activities/transaction-scripts/fetch-todays-tasks/fetch-todays-tasks.transcription-script';
 import { FetchTodaysActivities } from './domain/tasks/activities/transaction-scripts/fetch-todays-activities/fetch-todays-activities.transcription-script';
 import { ImportTasksTS } from './domain/tasks/tasks/transaction-scripts/import-tasks/import-tasks.transaction-script';
+import { TaskRepository } from './infrastructure/repositories/task-repository';
+import { RemoveZeroTags } from './domain/tasks/tasks/transaction-scripts/fix-tasks/remove-zero-tags.transaction-script';
 
 @Module({
   controllers: [TasksController, ActivityController],
   providers: [
+    // Repositories
+    TaskRepository,
     // Services
     TasksService,
     ActivityService,
@@ -33,6 +37,7 @@ import { ImportTasksTS } from './domain/tasks/tasks/transaction-scripts/import-t
     CreateDateTimeOfTaskTS,
     UpdateDateTime,
     ImportTasksTS,
+    RemoveZeroTags,
 
     // Activities TS
     FetchStatsForStackForRangeOfDates,
