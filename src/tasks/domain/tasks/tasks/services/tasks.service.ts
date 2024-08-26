@@ -10,6 +10,7 @@ import { FetchAllTaskTitlesTS } from '../transaction-scripts/fetch-all-task-titl
 import { CreateDateTimeOfTaskTS } from '../transaction-scripts/create-date-time/create-date-time.transcription-script';
 import { ImportTasksTS } from '../transaction-scripts/import-tasks/import-tasks.transaction-script';
 import { UpdateDateTime } from '../transaction-scripts/update-date-time/update-date-time.transcription-script';
+import { RemoveZeroTags } from '../transaction-scripts/fix-tasks/remove-zero-tags.transaction-script';
 
 @Injectable()
 export class TasksService {
@@ -19,6 +20,7 @@ export class TasksService {
         private readonly createDateTimeOfTaskTS: CreateDateTimeOfTaskTS,
         private readonly importTasksTS: ImportTasksTS,
         private readonly updateDateTime: UpdateDateTime,
+        private readonly removeZeroTags: RemoveZeroTags,
         private readonly stringUtil: StringUtil,
         private readonly dateUtil: DateUtil) { }
 
@@ -110,5 +112,10 @@ export class TasksService {
     //@TODO: Unit test this
     async importTasks(tasks: Task[]) {
         await this.importTasksTS.apply(tasks)
+    }
+
+    //@TODO: Unit test this
+    async fixZeros() {
+        return await this.removeZeroTags.apply()
     }
 }
