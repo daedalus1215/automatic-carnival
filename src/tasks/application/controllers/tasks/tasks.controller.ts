@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -68,5 +69,10 @@ export class TasksController {
   @Post('/import')
   async importTasks(@Body() body: Task[]) {
     return await this.taskService.importTasks(body)
+  }
+
+  @Patch("/fix")
+  async fixTasks() {
+    return await this.taskService.fixZeros()
   }
 }

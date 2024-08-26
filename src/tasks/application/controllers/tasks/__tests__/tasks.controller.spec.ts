@@ -1,6 +1,6 @@
+import { TasksService } from "src/tasks/domain/tasks/tasks/services/tasks.service";
 import { DateTimeDto } from "../../../dtos/update-task/date-time.dto";
 import { UpdateTaskDto } from "../../../dtos/update-task/update-task.dto";
-import { TasksService } from "../../../services/tasks.service";
 import { TasksController } from "../tasks.controller";
 
 describe('TasksController', () => {
@@ -73,28 +73,15 @@ describe('TasksController', () => {
     expect(taskServiceMock.updateDateTimeOfTask).toHaveBeenNthCalledWith(1, taskId, dateTime);
   });
 
-  it('should fetch tasks with includeTags, but not the ones with excludedTags', () => {
-    // Arrange
-    taskServiceMock.fetchAllMonthTasks = jest.fn();
-    const includeTags = ['1', '2'];
-    const excludeTags = ['3', '4'];
-
-    // Act
-    target.fetchAllMonthTasks(includeTags, excludeTags);
-
-    // Assert
-    expect(taskServiceMock.fetchAllMonthTasks).toHaveBeenNthCalledWith(1, includeTags, excludeTags);
-  });
-
   it('should fetch all task titles', () => {
     // Arrange
-    taskServiceMock.fetchAllTaskTitles = jest.fn();
+    taskServiceMock.fetchAllTitles = jest.fn();
     const title = '1';
 
     // Act
     target.fetchAllTaskTitles(title);
 
     // Assert
-    expect(taskServiceMock.fetchAllTaskTitles).toHaveBeenNthCalledWith(1, title);
+    expect(taskServiceMock.fetchAllTitles).toHaveBeenNthCalledWith(1, title);
   });
 });
