@@ -7,8 +7,9 @@ import { Injectable } from "@nestjs/common";
 export class TaskRepository {
     constructor(@InjectModel(Task.name) private model: Model<TaskDocument>) { }
 
-    async create(task: Task) {
-        return this.model.create(task);
+    async updateOne(task: any) {
+        console.log('task.id', task.id)
+        return this.model.updateOne({_id: task._id}, task);
     }
 
     async createTasks(tasks: Task[]) {
@@ -20,7 +21,7 @@ export class TaskRepository {
     }
 
     async findAllTasksWithZeroValuedTags() {
-        return this.model.find({tags: {"$eq": 0}})
+        return this.model.find({ tags: { $eq: 0 } })
     }
 
 }

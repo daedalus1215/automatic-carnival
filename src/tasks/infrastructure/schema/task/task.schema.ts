@@ -1,15 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { TimeVO } from './time.vo'
 import { ObjectId } from 'typeorm'
+import mongoose from 'mongoose'
 
 export type TaskDocument = Task & Document
 
 @Schema()
 export class Task {
-  @Prop({ alias: '_id', type: ObjectId })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, alias: '_id', default: () => new mongoose.Types.ObjectId() })
   id: string
 
-  @Prop({ alias: 'contractId' })
+  @Prop()
   tags: string[]
 
   @Prop({ trim: true })
